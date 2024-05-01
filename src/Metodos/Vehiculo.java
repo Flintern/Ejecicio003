@@ -10,10 +10,10 @@ package Metodos;
  */
 public class Vehiculo {
     
-    String matricula;
-    String marca;
-    String modelo;
-    double precio;
-    boolean estado;
+    private String matricula;
+    private String marca;
+    private String modelo;
+    private double precio;
+    private boolean estado;
     
 }
