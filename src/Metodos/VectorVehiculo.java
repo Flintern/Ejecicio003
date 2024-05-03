@@ -77,6 +77,7 @@ public class VectorVehiculo {
         try {
             if ((pos < 0) || (pos >= tam)) {
                 JOptionPane.showMessageDialog(null, "Posición invalida!");
+                return false;
             } else {
                 do {
                     b = getBuscarMatricula(matricula1.getText());
@@ -84,6 +85,7 @@ public class VectorVehiculo {
                         JOptionPane.showMessageDialog(null, "La matricula ya existe.  Intente " + "nuevamente!");
                         matricula1.setText("");
                         matricula1.requestFocus();
+                        return false;
                     }
                 } while (b != -1);
                 boolean est;
