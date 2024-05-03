@@ -4,13 +4,15 @@
  */
 package Metodos;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author equipo
  */
 public class JFrameSecundario extends javax.swing.JFrame {
 
-    VectorVehiculo VentanaPrincipal;
+    VectorVehiculo losVehiculos;
     int pos;
 
     /**
@@ -22,7 +24,7 @@ public class JFrameSecundario extends javax.swing.JFrame {
 
     public JFrameSecundario(VectorVehiculo cprinci) {
         initComponents();
-        VentanaPrincipal = cprinci;
+        losVehiculos = cprinci;
         pos = 0;
     }
 
@@ -223,6 +225,25 @@ public class JFrameSecundario extends javax.swing.JFrame {
 
     private void registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarActionPerformed
         // TODO add your handling code here:
+         if(pos<losVehiculos.misVehiculos.length){
+            if(losVehiculos.llenarVector(matricula1, marca1, modelo1, precio1, estado1, pos)){
+                losVehiculos.llenarJTable(jTable1);
+                pos++;
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,
+                    "Se han registrado todos los elementos!!");
+            registrar.setEnabled(false);
+            limpiar.setEnabled(false);
+            matricula1.setText("");
+            marca1.setText("");
+            modelo1.setText("");
+            precio1.setText("");
+            matricula1.setEnabled(false);
+            marca1.setEnabled(false);
+            precio1.setEnabled(false);
+            modelo1.setEnabled(false);
+        }
     }//GEN-LAST:event_registrarActionPerformed
 
     private void limpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_limpiarActionPerformed
