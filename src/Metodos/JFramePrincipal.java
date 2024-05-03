@@ -9,13 +9,15 @@ package Metodos;
  * @author equipo
  */
 public class JFramePrincipal extends javax.swing.JFrame {
-VectorVehiculo VentanaPrincipal;
+
+    VectorVehiculo VentanaPrincipal;
+
     /**
      * Creates new form JFramePrincipal
      */
     public JFramePrincipal() {
         initComponents();
-        VentanaPrincipal=null;
+        VentanaPrincipal = null;
     }
 
     /**
@@ -102,17 +104,17 @@ VectorVehiculo VentanaPrincipal;
     }// </editor-fold>//GEN-END:initComponents
 
     private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-         System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_CancelActionPerformed
 
     private void AcepActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcepActionPerformed
-       JFrameSecundario formulario1;
+        JFrameSecundario formulario1;
         VentanaPrincipal = new VectorVehiculo(tamañoVector);
-       if(VentanaPrincipal!=null){
-           formulario1=new JFrameSecundario(VentanaPrincipal);
-           formulario1.setVisible(true);
-           dispose();
-       } 
+        if (VentanaPrincipal != null) {
+            formulario1 = new JFrameSecundario(VentanaPrincipal);
+            formulario1.setVisible(true);
+            dispose();
+        }
     }//GEN-LAST:event_AcepActionPerformed
 
     /**
