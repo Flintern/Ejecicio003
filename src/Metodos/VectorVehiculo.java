@@ -40,6 +40,14 @@ public class VectorVehiculo {
         }
 
     }
+    public int getBuscarMatricula(String matr){
+        int i;
+        for( i=0; i<misVehiculos.length; i++ ){
+            if( matr.equals(misVehiculos[i].matricula) )
+                return i;
+        }
+        return -1;
+    }
 
     //Implementación del método que busca lineal o secuencialmente sobre los datos del vector.
     public int busquedaLinealMarca(String marc) {
@@ -71,7 +79,7 @@ public class VectorVehiculo {
                 JOptionPane.showMessageDialog(null, "Posición invalida!");
             } else {
                 do {
-                    b = EVELINHASELMETODOBINADRIO(matricula1.getText());
+                    b = getBuscarMatricula(matricula1.getText());
                     if (b != -1) {
                         JOptionPane.showMessageDialog(null, "La matricula ya existe.  Intente " + "nuevamente!");
                         matricula1.setText("");
@@ -104,8 +112,31 @@ public class VectorVehiculo {
         miModelo.setValueAt(misVehiculos[pVec].marca, pFila, 1);
         miModelo.setValueAt(misVehiculos[pVec].modelo, pFila, 2);
         miModelo.setValueAt(misVehiculos[pVec].precio, pFila, 3);
-        miModelo.setValueAt(misVehiculos[pVec].estado, pFila, 3);
+        miModelo.setValueAt(misVehiculos[pVec].estado, pFila, 4);
         
     }    
+    
+    public void llenarJTable(JTable tab){
+        int posTabla=0; //Este índice recorre los elementos de la fila Tabla
+        int posVec=0;  //Este índice para ubicar posición del vector
+        DefaultTableModel miModelo=new DefaultTableModel();
+
+        //Creamos los nombres de las columnas de la tabla
+        miModelo.addColumn("Matricula");
+        miModelo.addColumn("Marca");
+        miModelo.addColumn("Modelo"); 
+        miModelo.addColumn("Precio"); 
+        miModelo.addColumn("Estado"); 
+        
+        //Recorremos el vector para tomar sus datos
+        //y pasarlos al JTable
+        while(posVec<misVehiculos.length){                        
+            miModelo.addRow(new Object[]{ "", "", "", "", "" });              
+            setRegistrarFilaJTable(miModelo,posTabla,posVec);            
+            posVec++;
+            posTabla++;
+        }
+        tab.setModel(miModelo);
+    }
 
 }
