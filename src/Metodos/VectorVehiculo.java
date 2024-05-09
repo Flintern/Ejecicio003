@@ -40,11 +40,13 @@ public class VectorVehiculo {
         }
 
     }
-    public int getBuscarMatricula(String matr){
+
+    public int getBuscarMatricula(String matr) {
         int i;
-        for( i=0; i<misVehiculos.length; i++ ){
-            if( matr.equals(misVehiculos[i].matricula) )
+        for (i = 0; i < misVehiculos.length; i++) {
+            if (matr.equals(misVehiculos[i].matricula)) {
                 return i;
+            }
         }
         return -1;
     }
@@ -107,34 +109,35 @@ public class VectorVehiculo {
         }
 
     }
+
     public void setRegistrarFilaJTable(DefaultTableModel miModelo,
-        int pFila, int pVec){
-        
+            int pFila, int pVec) {
+
         miModelo.setValueAt(misVehiculos[pVec].matricula, pFila, 0);
         miModelo.setValueAt(misVehiculos[pVec].marca, pFila, 1);
         miModelo.setValueAt(misVehiculos[pVec].modelo, pFila, 2);
         miModelo.setValueAt(misVehiculos[pVec].precio, pFila, 3);
         miModelo.setValueAt(misVehiculos[pVec].estado, pFila, 4);
-        
-    }    
-    
-    public void llenarJTable(JTable tab){
-        int posTabla=0; //Este índice recorre los elementos de la fila Tabla
-        int posVec=0;  //Este índice para ubicar posición del vector
-        DefaultTableModel miModelo=new DefaultTableModel();
+
+    }
+
+    public void llenarJTable(JTable tab) {
+        int posTabla = 0; //Este índice recorre los elementos de la fila Tabla
+        int posVec = 0;  //Este índice para ubicar posición del vector
+        DefaultTableModel miModelo = new DefaultTableModel();
 
         //Creamos los nombres de las columnas de la tabla
         miModelo.addColumn("Matricula");
         miModelo.addColumn("Marca");
-        miModelo.addColumn("Modelo"); 
-        miModelo.addColumn("Precio"); 
-        miModelo.addColumn("Estado"); 
-        
+        miModelo.addColumn("Modelo");
+        miModelo.addColumn("Precio");
+        miModelo.addColumn("Estado");
+
         //Recorremos el vector para tomar sus datos
         //y pasarlos al JTable
-        while(posVec<misVehiculos.length){                        
-            miModelo.addRow(new Object[]{ "", "", "", "", "" });              
-            setRegistrarFilaJTable(miModelo,posTabla,posVec);            
+        while (posVec < misVehiculos.length) {
+            miModelo.addRow(new Object[]{"", "", "", "", ""});
+            setRegistrarFilaJTable(miModelo, posTabla, posVec);
             posVec++;
             posTabla++;
         }
