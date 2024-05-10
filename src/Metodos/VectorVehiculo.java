@@ -40,7 +40,75 @@ public class VectorVehiculo {
         }
 
     }
+    public void setIntercambio(int posA, int posS){
+        Vehiculo temp;
+        //Copiamos la información de la 
+        //posicion anterior
+        temp = new Vehiculo(
+                misVehiculos[posA].matricula,
+                misVehiculos[posA].marca,
+                misVehiculos[posA].modelo,
+                misVehiculos[posA].precio,
+                misVehiculos[posA].estado
+        );
+        //Cambiamos la informacion del anterior
+        //por la información del siguiente
+        misVehiculos[posA].matricula = misVehiculos[posS].matricula;
+        misVehiculos[posA].marca = misVehiculos[posS].marca;
+        misVehiculos[posA].modelo = misVehiculos[posS].modelo;
+        misVehiculos[posA].precio = misVehiculos[posS].precio;
+        misVehiculos[posA].estado = misVehiculos[posS].estado;
+        //Cambiamos la información del siguiente
+        //por la informacion que tenía (temp) el anterior
+        misVehiculos[posS].matricula = temp.matricula;
+        misVehiculos[posS].marca = temp.marca;
+        misVehiculos[posS].modelo = temp.modelo;
+        misVehiculos[posS].precio = temp.precio;
+        misVehiculos[posS].estado= temp.estado;
+    }
+    
+    //ordenamiento por seleccion
+     public void ordenarVehiculos() {
+        for (int i = 0; i < misVehiculos.length - 1; i++) {
+            int indiceMenor = i;
+            for (int j = i + 1; j < misVehiculos.length; j++) {
+                if (misVehiculos[j].matricula.compareTo(misVehiculos[indiceMenor].matricula) < 0) {
+                    indiceMenor = j;
+                }
+            }
+            setIntercambio(indiceMenor, i);
+           
+        }
+    }
+// Implementación de búsqueda binaria por matrícula
+    public int busquedaBinariaPorMatricula(String matriculaBuscada) {
+        int izquierda = 0;
+        int derecha = misVehiculos.length - 1;
+        int centro;
 
+        ordenarVehiculos(); // Asegurarse de que los vehículos están ordenados por matrícula.
+
+        while (izquierda <= derecha) {
+            centro = (izquierda + derecha) / 2;
+
+            // Compara la matrícula buscada con la matrícula en la posición centro.
+            int resultadoComparacion = matriculaBuscada.compareTo(misVehiculos[centro].matricula);
+
+            if (resultadoComparacion == 0) {
+                // La matrícula fue encontrada en la posición centro.
+                return centro;
+            } else if (resultadoComparacion < 0) {
+                // La matrícula buscada es menor que la del centro, buscar en la mitad izquierda.
+                derecha = centro - 1;
+            } else {
+                // La matrícula buscada es mayor que la del centro, buscar en la mitad derecha.
+                izquierda = centro + 1;
+            }
+        }
+
+        // La matrícula no fue encontrada.
+        return -1;
+    }
     public int getBuscarMatricula(String matr) {
         int i;
         for (i = 0; i < misVehiculos.length; i++) {
