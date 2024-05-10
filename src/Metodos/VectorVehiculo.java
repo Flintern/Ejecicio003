@@ -40,7 +40,8 @@ public class VectorVehiculo {
         }
 
     }
-    public void setIntercambio(int posA, int posS){
+
+    public void setIntercambio(int posA, int posS) {
         Vehiculo temp;
         //Copiamos la información de la 
         //posicion anterior
@@ -64,11 +65,11 @@ public class VectorVehiculo {
         misVehiculos[posS].marca = temp.marca;
         misVehiculos[posS].modelo = temp.modelo;
         misVehiculos[posS].precio = temp.precio;
-        misVehiculos[posS].estado= temp.estado;
+        misVehiculos[posS].estado = temp.estado;
     }
-    
+
     //ordenamiento por seleccion
-     public void ordenarVehiculos() {
+    public void ordenarVehiculos() {
         for (int i = 0; i < misVehiculos.length - 1; i++) {
             int indiceMenor = i;
             for (int j = i + 1; j < misVehiculos.length; j++) {
@@ -77,10 +78,11 @@ public class VectorVehiculo {
                 }
             }
             setIntercambio(indiceMenor, i);
-           
+
         }
     }
 // Implementación de búsqueda binaria por matrícula
+
     public int busquedaBinariaPorMatricula(String matriculaBuscada) {
         int izquierda = 0;
         int derecha = misVehiculos.length - 1;
@@ -109,6 +111,7 @@ public class VectorVehiculo {
         // La matrícula no fue encontrada.
         return -1;
     }
+
     public int getBuscarMatricula(String matr) {
         int i;
         for (i = 0; i < misVehiculos.length; i++) {
@@ -140,6 +143,21 @@ public class VectorVehiculo {
             }
         }
         return posicion;
+    }
+
+    public void ordenamientoShellDescendente() {
+        int n = misVehiculos.length;
+
+        for (int salto = n / 2; salto > 0; salto /= 2) {
+            for (int i = salto; i < n; i++) {
+                Vehiculo temp = misVehiculos[i];
+                int j;
+                for (j = i; j >= salto && misVehiculos[j - salto].marca.compareTo(temp.marca) < 0; j -= salto) {
+                    misVehiculos[j] = misVehiculos[j - salto];
+                }
+                misVehiculos[j] = temp;
+            }
+        }
     }
 
     public boolean llenarVector(JTextField matricula1, JTextField marca1, JTextField modelo1, JTextField precio1, JComboBox estado1, int pos) {
