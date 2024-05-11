@@ -133,7 +133,7 @@ public class VectorVehiculo {
     public int getBuscarMatricula(String matr) {
         int i;
         for (i = 0; i < misVehiculos.length; i++) {
-            if (matr.equals(misVehiculos[i].matricula)) {
+            if (matr.equals(misVehiculos[i].getMatricula())) {
                 return i;
             }
         }
@@ -267,6 +267,30 @@ public class VectorVehiculo {
             posTabla++;
         }
         tab.setModel(miModelo);
+    }
+    
+public void quickSort(int inicio, int fin) {
+        if (inicio < fin) {
+            double pivote = misVehiculos[fin].precio;
+            int i = inicio - 1;
+            for (int j = inicio; j < fin; j++) {
+                if (misVehiculos[j].precio < pivote) {
+                    i++;
+                    swap(i, j);
+                }
+            }
+            i++;
+            swap(i, fin);
+            quickSort(inicio, i - 1);
+            quickSort(i + 1, fin);
+        }
+    }
+    
+    //Método de intercambio para QuickSort
+    public void swap(int i, int j) {
+        Vehiculo temp = misVehiculos[i];
+        misVehiculos[i] = misVehiculos[j];
+        misVehiculos[j] = temp;
     }
 
 }
