@@ -16,8 +16,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VectorVehiculo {
 
-    Vehiculo misVehiculos[];
-    int tam;
+    private Vehiculo misVehiculos[];
+    private int tam;
+
+    public Vehiculo[] getMisVehiculos() {
+        return misVehiculos;
+    }
+
+    public void setMisVehiculos(Vehiculo[] misVehiculos) {
+        this.misVehiculos = misVehiculos;
+    }
+
+    public int getTam() {
+        return tam;
+    }
+
+    public void setTam(int tam) {
+        this.tam = tam;
+    }
 
     VectorVehiculo(JTextField tamVector) {
         int i;
@@ -83,7 +99,9 @@ public class VectorVehiculo {
     }
 // Implementación de búsqueda binaria por matrícula
 
-    public int busquedaBinariaPorMatricula(String matriculaBuscada) {
+    public int busquedaBinariaPorMatricula() {
+        String matriculaBuscada = (JOptionPane.showInputDialog(
+                "Entre la matricula a buscar: "));
         int izquierda = 0;
         int derecha = misVehiculos.length - 1;
         int centro;
@@ -122,27 +140,48 @@ public class VectorVehiculo {
         return -1;
     }
 
-    //Implementación del método que busca lineal o secuencialmente sobre los datos del vector.
-    public int busquedaLinealMarca(String marc) {
-        int i; //Variable para controlar el ciclo while.
-        int posicion; //Variable que devuelve la posición en la que se encuentra el elemento buscado.
-        //Se Asigna el valor de -1 a la variable posición para devolver este valor en el supuesto caso de
-        //que no se encuentre el valor buscado dentro del vector.
-        posicion = -1;
-        i = 0;
-        //Mientras que no se llegue al final del vector y no se haya encontrado el dato buscado en el vector.
-        while ((i <= misVehiculos.length - 1) && (posicion == -1)) {
-            //Si el contenido del vector en la posición i-esima es igual al dato que se está buscando, entonces
-            //el dato si está en el vector y se devuelve la posición en donde se encuentra el dato dentro del
-            //vector. Si no, es porque el dato no se encuentra en esa posición, y se incrementa la posición (i)
-            //para una nueva comparación.
+    public int[] busquedaLinealMarca() {
+        String marc = (JOptionPane.showInputDialog(
+                "Entre la marca a buscar: "));
+
+        int contador = 0;
+        int posiciones[] = new int[misVehiculos.length];
+
+        for (int i = 0; i < misVehiculos.length; i++) {
             if (marc.equals(misVehiculos[i].marca)) {
-                posicion = i;
-            } else {
-                i = i + 1;
+                posiciones[contador] = i;
+                contador++;
             }
         }
-        return posicion;
+        int[] posicionesEncontradas = new int[contador];
+        for (int r = 0; r < contador; r++) {
+            posicionesEncontradas[r] = posiciones[r];
+        }
+        return posicionesEncontradas;
+    }
+
+    public void getMostrarMarca() {
+        int pos[] = busquedaLinealMarca();
+
+        if (pos.length == 0) {
+            JOptionPane.showMessageDialog(null,
+                    "No hay un vehiculo registrado con esa marca.");
+        } else {
+            for (int posiciones : pos) {
+                misVehiculos[posiciones].getMostrarVehiculo();
+            }
+        }
+    }
+
+    public void getMostrarMatricula() {
+        int pos = busquedaBinariaPorMatricula();
+
+        if (pos == -1) {
+            JOptionPane.showMessageDialog(null,
+                    "No hay un vehiculo registrado con esa matricula.");
+        } else {
+            misVehiculos[pos].getMostrarVehiculo();
+        }
     }
 
     public void ordenamientoShellDescendente() {
