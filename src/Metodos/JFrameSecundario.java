@@ -138,6 +138,11 @@ public class JFrameSecundario extends javax.swing.JFrame {
         });
 
         jButton3.setText("Ordenar por Precio");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -356,6 +361,13 @@ public class JFrameSecundario extends javax.swing.JFrame {
         // TODO add your handling code here:
         losVehiculos.getMostrarMatricula();
     }//GEN-LAST:event_BotonBuscarMatrActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here
+        
+        losVehiculos.quickSort(0,losVehiculos.getMisVehiculos().length-1);
+        losVehiculos.llenarJTable(jTable1);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
